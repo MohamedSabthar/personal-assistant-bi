@@ -35,11 +35,8 @@ isolated function sendEmail(string[] to, string subject, string body) returns gm
     label: "Get Calander Events",
     iconPath: "https://bcentral-packageicons.azureedge.net/images/ballerinax_googleapis.calendar_4.0.1.png"
 }
-isolated function getCalanderEvents() returns calendar:Event[]|error {
-    stream<calendar:Event, error?> eventStream = check calendarClient->getEvents(userEmail);
-    calendar:Event[] events = check from var event in eventStream
-        select event;
-    return events;
+isolated function getCalanderEvents() returns stream<calendar:Event, error?>|error {
+    return calendarClient->getEvents(userEmail);
 }
 
 @agent:Tool
