@@ -9,3 +9,4 @@ configurable string apiVersion = ?;
 configurable string serviceUrl = ?;
 
 configurable string userName = ?;
+configurable string userEmail = "agentdemo678@gmail.com";
