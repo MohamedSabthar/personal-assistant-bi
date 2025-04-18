@@ -1,12 +1,11 @@
 import ballerina/http;
-import ballerinax/ai.agent;
+import ballerinax/ai;
 
-listener agent:Listener personalAiAssistantListener = new (listenOn = check http:getDefaultListener());
+listener ai:Listener personalAiAssistantAgentListener = new (listenOn = check http:getDefaultListener());
 
-service /personalAiAssistant on personalAiAssistantListener {
-    resource function post chat(@http:Payload agent:ChatReqMessage request) returns agent:ChatRespMessage|error {
-
-        string stringResult = check _personalAiAssistantAgent->run(request.message);
-        return {message: stringResult};
+service /personalAiAssistantAgent on personalAiAssistantAgentListener {
+    resource function post chat(@http:Payload ai:ChatReqMessage request) returns ai:ChatRespMessage|error {
+        string agentResponse = check _personalAiAssistantAgent->run(request.message);
+        return {message: agentResponse};
     }
 }
